@@ -1,0 +1,28 @@
+((100-50)/100) #probabilitas untuk Ak (kebangkrutan)
+(50/100) #probabilitas untuk Bk (kemenangan)
+
+50*(100-50) #banyaknya permainan yang harus dijalani
+
+A=50; #modal penjudi A
+B=50; #modal penjudi B
+p=0.5; #probabilitas kemenangan penjudi A
+q=0.5; #probabilitas kekalahan penjudi A
+Rec=c(A) #simulasi ditinjau dari pemain A
+Total=A+B #modal N
+while(A>0) #pembangkitan nilai probabilitas lebih dari 0
+{ProbVal=runif(1) #menggunakan distribusi uniform
+if (ProbVal <= p) #apabila munculnya probabilitas kurang dari sama dengan 0.5
+{A = A+1; B = B-1} #maka modal A akan bertambah 1 dan modal B berkurang 1
+else #sebaliknya apabila munculnya probabilitas lebih dari 0.5
+{A=A-1;B=B+1} #maka modal A akan berkurang 1 dan modal B bertambah 1
+Rec=c(Rec,A); if(A==Total){break}} #permainan berhenti apabila modal mencapai absorbsi
+
+plot(Rec,type="l",col="blue") #pembentukan plot
+#Axes
+abline(h=0); abline(v=0)
+#Also the gamblers initial value and the total value of the game (optional)
+abline(h=A,col="red"); abline(h=Total,col="green")
+Rec #perubahan modal penjudi A
+length(Rec) #banyaknya permainan yang dilakukan
+max(Rec) #posisi modal terbanyak yang dimiliki penjudi A
+min(Rec) #posisi modal terkecil yang dimiliki penjudi A
